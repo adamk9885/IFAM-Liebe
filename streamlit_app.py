@@ -10,7 +10,7 @@ col1, col2 = st.columns(2)
 with col1:
     ankunftszeit = st.time_input(label="Ankunftszeit", step=60)
 with col2:
-    sonstige_pause = st.number_input(label="Längere Mittagspause? (min)")
+    sonstige_pause = st.number_input(label="Längere Mittagspause? (min)", min_value=30, value=30, step=1)
 
 if st.button(label="Rechnen"):
     ankunftszeit_timedelta = timedelta(hours=ankunftszeit.hour, minutes=ankunftszeit.minute)
@@ -22,8 +22,11 @@ if st.button(label="Rechnen"):
 
     if sonstige_pause > 30:
         abweichung = sonstige_pause_timedelta - timedelta(minutes=30)
+    elif sonstige_pause > 60:
+        abweichung = sonstige_pause_timedelta - timedelta(minutes=30)
+        st.toast(label="Wow, du liebst IFAM nicht")
     else:
-        abweichung = 0
+        abweichung = timedelta(minutes=0)
     
     normalzeit = ankunftszeit_timedelta + normalzeit_delta + abweichung
     neunstd = ankunftszeit_timedelta + neunstd_delta + abweichung
@@ -34,5 +37,5 @@ if st.button(label="Rechnen"):
     maxzeit_time = (datetime.min + maxzeit).time()
 
     st.subheader(f"Um {normalzeit_time.strftime("%H:%M")} Uhr hast du einen ganzen Tag (7,8std) gearbeitet")
-    st.subheader(f"Um {neunstd_time.strftime("%H:%M")} Uhr hast du 9Std gearbeitet, pass auf, wenn du jetzt gehen kannst, geh. Ansonsten zählen die nächste 15Min nicht.")
+    st.subheader(f"Um {neunstd_time.strftime("%H:%M")} Uhr hast du 9Std gearbeitet, pass auf, wenn du jetzt gehen kannst, geh. Ansonsten zählen die nächste 15 Min nicht.")
     st.subheader(f"{maxzeit_time.strftime("%H:%M")} Uhr ist max-Leistung")

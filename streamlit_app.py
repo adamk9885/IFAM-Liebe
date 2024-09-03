@@ -12,6 +12,9 @@ with col1:
 with col2:
     sonstige_pause = st.number_input(label="Längere Mittagspause? (min)", min_value=30, value=30, step=1)
 
+if sonstige_pause > 60:
+    st.toast(label="Wow, du liebst IFAM nicht")
+
 if st.button(label="Rechnen"):
     ankunftszeit_timedelta = timedelta(hours=ankunftszeit.hour, minutes=ankunftszeit.minute)
     sonstige_pause_timedelta = timedelta(minutes=sonstige_pause)
@@ -22,9 +25,6 @@ if st.button(label="Rechnen"):
 
     if sonstige_pause > 30:
         abweichung = sonstige_pause_timedelta - timedelta(minutes=30)
-    elif sonstige_pause > 60:
-        abweichung = sonstige_pause_timedelta - timedelta(minutes=30)
-        st.toast(label="Wow, du liebst IFAM nicht")
     else:
         abweichung = timedelta(minutes=0)
     

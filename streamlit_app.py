@@ -13,7 +13,7 @@ with col2:
     sonstige_pause = st.number_input(label="Längere Mittagspause? (min)", min_value=30, value=30, step=1)
 
 if sonstige_pause > 60:
-    st.toast(label="Wow, du liebst IFAM nicht")
+    st.toast("Wow, du liebst das IFAM nicht")
 
 if st.button(label="Rechnen"):
     ankunftszeit_timedelta = timedelta(hours=ankunftszeit.hour, minutes=ankunftszeit.minute)

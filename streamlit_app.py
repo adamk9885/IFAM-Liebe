@@ -5,18 +5,29 @@ st.set_page_config(layout="wide")
 
 st.title("IFAM LIEBE")
 
-ankunftszeit = st.time_input(label="Ankunftszeit", step=60)
+col1, col2 = st.columns(2)
+
+with col1:
+    ankunftszeit = st.time_input(label="Ankunftszeit", step=60)
+with col2:
+    sonstige_pause = st.number_input(label="Längere Mittagspause? (min)")
 
 if st.button(label="Rechnen"):
     ankunftszeit_timedelta = timedelta(hours=ankunftszeit.hour, minutes=ankunftszeit.minute)
-
+    sonstige_pause_timedelta = timedelta(minutes=sonstige_pause)
+    
     normalzeit_delta = timedelta(hours=8, minutes=18)
     neunstd_delta = timedelta(hours=9, minutes=30)
     maxzeit_delta = timedelta(hours=10, minutes=45)
 
-    normalzeit = ankunftszeit_timedelta + normalzeit_delta
-    neunstd = ankunftszeit_timedelta + neunstd_delta
-    maxzeit = ankunftszeit_timedelta + maxzeit_delta
+    if sonstige_pause > 30:
+        abweichung = sonstige_pause_timedelta - timedelta(minutes=30)
+    else:
+        abweichung = 0
+    
+    normalzeit = ankunftszeit_timedelta + normalzeit_delta + abweichung
+    neunstd = ankunftszeit_timedelta + neunstd_delta + abweichung
+    maxzeit = ankunftszeit_timedelta + maxzeit_delta + abweichung
 
     normalzeit_time = (datetime.min + normalzeit).time()
     neunstd_time = (datetime.min + neunstd).time()

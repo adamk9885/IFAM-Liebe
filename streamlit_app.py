@@ -36,6 +36,6 @@ if st.button(label="Rechnen"):
     neunstd_time = (datetime.min + neunstd).time()
     maxzeit_time = (datetime.min + maxzeit).time()
 
-    st.subheader(f"Um {normalzeit_time.strftime("%H:%M")} Uhr hast du einen ganzen Tag (7,8std) gearbeitet")
-    st.subheader(f"Um {neunstd_time.strftime("%H:%M")} Uhr hast du 9Std gearbeitet, pass auf, wenn du jetzt gehen kannst, geh. Ansonsten zählen die nächste 15 Min nicht.")
-    st.subheader(f"{maxzeit_time.strftime("%H:%M")} Uhr ist max-Leistung")
+    st.subheader(f"Um :red[{normalzeit_time.strftime("%H:%M")}] Uhr hast du einen ganzen Tag (7,8std) gearbeitet")
+    st.subheader(f"Um :red[{neunstd_time.strftime("%H:%M")}] Uhr hast du 9Std gearbeitet, pass auf, wenn du jetzt gehen kannst, geh. Ansonsten zählen die nächsten 15 Min nicht.")
+    st.subheader(f":red[{maxzeit_time.strftime("%H:%M")}] Uhr ist max-Leistung")

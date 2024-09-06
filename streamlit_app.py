@@ -50,4 +50,4 @@ if st.button(label="Rechnen"):
     hours = zeit_geleistet_minuten // 60
     minutes = zeit_geleistet_minuten % 60
 
-    st.subheader(f"Bisher hast du :red[{hours} Stunden] und :red[{minutes} Minuten] gearbeitet")
+    # st.subheader(f"Bisher hast du :red[{hours} Stunden] und :red[{minutes} Minuten] gearbeitet")

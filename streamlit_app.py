@@ -39,3 +39,15 @@ if st.button(label="Rechnen"):
     st.subheader(f"Um :red[{normalzeit_time.strftime("%H:%M")}] Uhr hast du einen ganzen Tag (7,8std) gearbeitet")
     st.subheader(f"Um :red[{neunstd_time.strftime("%H:%M")}] Uhr hast du 9Std gearbeitet, pass auf, wenn du jetzt gehen kannst, geh. Ansonsten zählen die nächsten 15 Min nicht.")
     st.subheader(f":red[{maxzeit_time.strftime("%H:%M")}] Uhr ist max-Leistung")
+
+        aktuelle_zeit = datetime.now().time()
+
+    ankunftszeit_minutes = ankunftszeit.hour * 60 + ankunftszeit.minute
+    aktuelle_zeit_minutes = aktuelle_zeit.hour * 60 + aktuelle_zeit.minute
+
+    zeit_geleistet_minuten = aktuelle_zeit_minutes - ankunftszeit_minutes
+
+    hours = zeit_geleistet_minuten // 60
+    minutes = zeit_geleistet_minuten % 60
+
+    st.subheader(f"Bisher hast du :red[{hours} Stunden] und :red[{minutes} Minuten] gearbeitet")

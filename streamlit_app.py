@@ -32,7 +32,7 @@ if sonstige_pause > 60:
 col1, col2, col3 = st.columns([3, 4, 3])
 
 with col2:
-    if st.button(label="Rechnen"):
+    if st.button(label="Rechnen", use_container_width=True):
         ankunftszeit_timedelta = timedelta(hours=int(new_hours), minutes=int(new_minutes))
         sonstige_pause_timedelta = timedelta(minutes=sonstige_pause)
 

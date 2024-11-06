@@ -4,7 +4,11 @@ from datetime import datetime, timedelta, time
 st.set_page_config(layout="wide")
 st.html("<style>[data-testid='stHeaderActionElements'] {display: none;}</style>")  # hide links next to headers
 
-st.title("IFAM LIEBE")
+col1, col2, col3 = st.columns([3.5, 4, 3])
+with col2:
+    st.image("IFAM_logo.png")
+
+st.markdown(f"""<div style="height: 50px;"></div>""", unsafe_allow_html=True)
 
 col1, col2, col3, col4, col5 = st.columns([3, 1, 1, 2, 3])
 
@@ -25,31 +29,34 @@ with col4:
 if sonstige_pause > 60:
     st.toast("Wow, du liebst das IFAM nicht")
 
-if st.button(label="Rechnen"):
-    ankunftszeit_timedelta = timedelta(hours=int(new_hours), minutes=int(new_minutes))
-    sonstige_pause_timedelta = timedelta(minutes=sonstige_pause)
+col1, col2, col3 = st.columns([3, 4, 3])
 
-    normalzeit_delta = timedelta(hours=8, minutes=18)
-    neunstd_delta = timedelta(hours=9, minutes=30)
-    maxzeit_delta = timedelta(hours=10, minutes=45)
+with col2:
+    if st.button(label="Rechnen"):
+        ankunftszeit_timedelta = timedelta(hours=int(new_hours), minutes=int(new_minutes))
+        sonstige_pause_timedelta = timedelta(minutes=sonstige_pause)
 
-    if sonstige_pause > 30:
-        abweichung = sonstige_pause_timedelta - timedelta(minutes=30)
-    else:
-        abweichung = timedelta(minutes=0)
+        normalzeit_delta = timedelta(hours=8, minutes=18)
+        neunstd_delta = timedelta(hours=9, minutes=30)
+        maxzeit_delta = timedelta(hours=10, minutes=45)
 
-    normalzeit = ankunftszeit_timedelta + normalzeit_delta + abweichung
-    neunstd = ankunftszeit_timedelta + neunstd_delta + abweichung
-    maxzeit = ankunftszeit_timedelta + maxzeit_delta + abweichung
+        if sonstige_pause > 30:
+            abweichung = sonstige_pause_timedelta - timedelta(minutes=30)
+        else:
+            abweichung = timedelta(minutes=0)
 
-    normalzeit_time = (datetime.min + normalzeit).time()
-    neunstd_time = (datetime.min + neunstd).time()
-    maxzeit_time = (datetime.min + maxzeit).time()
+        normalzeit = ankunftszeit_timedelta + normalzeit_delta + abweichung
+        neunstd = ankunftszeit_timedelta + neunstd_delta + abweichung
+        maxzeit = ankunftszeit_timedelta + maxzeit_delta + abweichung
+
+        normalzeit_time = (datetime.min + normalzeit).time()
+        neunstd_time = (datetime.min + neunstd).time()
+        maxzeit_time = (datetime.min + maxzeit).time()
 
 
-    st.subheader(f"Um :red[{normalzeit_time.strftime("%H:%M")}] Uhr hast du einen ganzen Tag (7,8std) gearbeitet")
-    st.subheader(f"Um :red[{neunstd_time.strftime("%H:%M")}] Uhr hast du 9Std gearbeitet, pass auf, wenn du jetzt gehen kannst, geh. Ansonsten zählen die nächsten 15 Min nicht.")
-    st.subheader(f":red[{maxzeit_time.strftime("%H:%M")}] Uhr ist max-Leistung")
+        st.subheader(f":red[{normalzeit_time.strftime("%H:%M")}] \u2192 voller Tag")
+        st.subheader(f":red[{neunstd_time.strftime("%H:%M")}] \u2192 mittlere-Leistung")
+        st.subheader(f":red[{maxzeit_time.strftime("%H:%M")}] \u2192 max-Leistung")
 
 
     # aktuelle_zeit = datetime.now().time()

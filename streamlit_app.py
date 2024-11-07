@@ -3,6 +3,7 @@ from datetime import datetime, timedelta, time
 
 st.set_page_config(layout="wide")
 st.html("<style>[data-testid='stHeaderActionElements'] {display: none;}</style>")  # hide links next to headers
+st.markdown('''<style>button[title="View fullscreen"]{visibility: hidden;}</style>''', unsafe_allow_html=True)  # hide full screen image option
 
 col1, col2, col3 = st.columns([3.5, 4, 3])
 with col2:
@@ -36,6 +37,7 @@ with col2:
         ankunftszeit_timedelta = timedelta(hours=int(new_hours), minutes=int(new_minutes))
         sonstige_pause_timedelta = timedelta(minutes=sonstige_pause)
 
+        sechsstdzeit_delta = timedelta(hours=6)
         normalzeit_delta = timedelta(hours=8, minutes=18)
         neunstd_delta = timedelta(hours=9, minutes=30)
         maxzeit_delta = timedelta(hours=10, minutes=45)
@@ -45,15 +47,17 @@ with col2:
         else:
             abweichung = timedelta(minutes=0)
 
+        sechsstdzeit = ankunftszeit_timedelta + sechsstdzeit_delta
         normalzeit = ankunftszeit_timedelta + normalzeit_delta + abweichung
         neunstd = ankunftszeit_timedelta + neunstd_delta + abweichung
         maxzeit = ankunftszeit_timedelta + maxzeit_delta + abweichung
 
+        sechsstdzeit_time = (datetime.min + sechsstdzeit).time()
         normalzeit_time = (datetime.min + normalzeit).time()
         neunstd_time = (datetime.min + neunstd).time()
         maxzeit_time = (datetime.min + maxzeit).time()
 
-
+        st.subheader(f":red[{sechsstdzeit.strftime("%H:%M")}] \u2192 Mindestleistung")
         st.subheader(f":red[{normalzeit_time.strftime("%H:%M")}] \u2192 voller Tag")
         st.subheader(f":red[{neunstd_time.strftime("%H:%M")}] \u2192 mittlere-Leistung")
         st.subheader(f":red[{maxzeit_time.strftime("%H:%M")}] \u2192 max-Leistung")

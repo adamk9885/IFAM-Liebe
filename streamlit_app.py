@@ -57,7 +57,7 @@ with col2:
         neunstd_time = (datetime.min + neunstd).time()
         maxzeit_time = (datetime.min + maxzeit).time()
 
-        st.subheader(f":red[{sechsstdzeit.strftime("%H:%M")}] \u2192 Mindestleistung")
+        st.subheader(f":red[{sechsstdzeit_time.strftime("%H:%M")}] \u2192 Mindestleistung")
         st.subheader(f":red[{normalzeit_time.strftime("%H:%M")}] \u2192 voller Tag")
         st.subheader(f":red[{neunstd_time.strftime("%H:%M")}] \u2192 mittlere-Leistung")
         st.subheader(f":red[{maxzeit_time.strftime("%H:%M")}] \u2192 max-Leistung")

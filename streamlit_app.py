@@ -58,8 +58,8 @@ with col2:
         maxzeit_time = (datetime.min + maxzeit).time()
 
         st.subheader(f":red[{sechsstdzeit_time.strftime("%H:%M")}] \u2192 Mindestleistung")
-        st.subheader(f":red[{normalzeit_time.strftime("%H:%M")}] \u2192 Voller Tag")
-        st.subheader(f":red[{neunstd_time.strftime("%H:%M")}] \u2192 Mittlere-Leistung")
+        st.subheader(f":red[{normalzeit_time.strftime("%H:%M")}] \u2192 genau 7,8std. Nichts mehr, nichts weniger.")
+        st.subheader(f":red[{neunstd_time.strftime("%H:%M")}] \u2192 9std, Zeit zum fliehen")
         st.subheader(f":red[{maxzeit_time.strftime("%H:%M")}] \u2192 Max-Leistung")
 
 

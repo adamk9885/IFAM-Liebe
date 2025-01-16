@@ -1,15 +1,8 @@
 import streamlit as st
-from datetime import datetime, timedelta, time
+from datetime import datetime, timedelta
+from basic_functions import page_setup
 
-st.set_page_config(layout="wide")
-st.html("<style>[data-testid='stHeaderActionElements'] {display: none;}</style>")  # hide links next to headers
-st.markdown('''<style>button[title="View fullscreen"]{visibility: hidden;}</style>''', unsafe_allow_html=True)  # hide full screen image option
-
-col1, col2, col3 = st.columns([3.5, 4, 3])
-with col2:
-    st.image("IFAM_logo.png")
-
-st.markdown(f"""<div style="height: 50px;"></div>""", unsafe_allow_html=True)
+page_setup()
 
 col1, col2, col3, col4, col5 = st.columns([3, 1, 1, 2, 3])
 
@@ -27,7 +20,7 @@ ankunftszeit = f"{new_hours}:{new_minutes}"
 with col4:
     sonstige_pause = st.number_input(label="Längere Mittagspause? (min)", min_value=30, value=30, step=1)
 
-if sonstige_pause > 60:
+if sonstige_pause > 30:
     st.toast("Wow, du liebst das IFAM nicht")
 
 col1, col2, col3 = st.columns([3, 4, 3])

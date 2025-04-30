@@ -8,11 +8,11 @@ col1, col2, col3, col4, col5 = st.columns([3, 1, 1, 2, 3])
 
 with col2:
     new_hours = st.selectbox(label="Uhr", index=7,
-                             options=["0" + str(t) for t in range(0, 10)] + [str(t) for t in range(10, 25)],
+                             options=["0" + str(t) for t in range(0, 10)] + [str(t) for t in range(10, 24)],
                              key="hours_countdown_timer_selectbox_key")
 with col3:
     new_minutes = st.selectbox(label="verborgen", index=0,
-                               options=["0" + str(t) for t in range(0, 10)] + [str(t) for t in range(10, 61)],
+                               options=["0" + str(t) for t in range(0, 10)] + [str(t) for t in range(10, 60)],
                                label_visibility="hidden", key="min_countdown_timer_selectbox_key")
 
 ankunftszeit = f"{new_hours}:{new_minutes}"
